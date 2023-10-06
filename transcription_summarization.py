@@ -73,6 +73,3 @@ def post_lemur(api_token, data):
     response = requests.post(url, json=data, headers=headers)
     return response
 
-def get_coords(address):
-    g = geocoder.bing(address, key='Aowcdh3tB--xi-HGt95MZr7jCFWqDenSzKp0yDtC2AgfH_HstHkEBY2XkFgw9XW9')
-    return [g.json['lat'], g.json['lng']]

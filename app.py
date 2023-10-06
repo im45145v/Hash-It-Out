@@ -5,6 +5,7 @@ import os
 from transcription_summarization import transcribe,summarize
 from utils import *
 app = Flask(__name__)
+app.secret_key='veryrandsoemthingslfak;domthing'
 
 # Home page
 @app.route('/')
@@ -26,9 +27,11 @@ def upload():
     audio_file = request.files['audio_file']
     audio_bytes = audio_file.read()
     transcription , transcription_id = transcribe(audio_bytes)
+    print(transcription)
     summary = summarize(transcription_id, context = "The caller is contacting a first responder with an emergency distress call")
     address = get_address(transcription_id)
     coords = get_coords(address)
+    session['details']={'summary':summary, 'address':address,'coords':coords,'transcription':transcription}
     # transcription = summary = address= ''
     # Check if the file is empty
     # if audio_file.filename == '':
@@ -41,6 +44,13 @@ def upload():
     # transcribe(audio_file)
 
     return render_template('transcription.html',transcription=transcription, summary = summary,coords=coords, address=address)
-
+@app.route('/analysis', methods=['GET','POST'])
+def analysis():
+    data = session['details']
+    category = get_category(data['transcription'])
+    nearest = get_nearest(category, data['coords'][0], data['coords'][1])
+    analysis_data = {'category':category, 'nearest': nearest}
+    return render_template('analysis.html',analysis_data=analysis_data)
+    
 if __name__ == '__main__':
     app.run(debug=True)

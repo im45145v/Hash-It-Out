@@ -1,5 +1,8 @@
 import requests
 import geocoder
+import math
+import pandas as pd
+import cohere
 
 API_KEY="ab8609a877cd4f91b6269e7f768127a6"
 # replace with your API token
@@ -58,3 +61,42 @@ def question(transcript_id,question):
     else:
         return(lemur_response)
 
+def get_nearest(type, lat, long):
+    if type=="Law and Order":
+        police_db = pd.read_csv("hyd_police_stn_jurisdictions.csv")
+        nearest=[]
+        count=0
+        for index, entry in police_db.iterrows():
+            distance = 3959 * math.acos( math.cos( math.radians(lat) ) * math.cos( math.radians( float(entry["Y"]) ) ) * 
+math.cos( math.radians( long ) - math.radians(float(entry["X"])) ) + math.sin( float(math.radians(entry["Y"] )) ) * 
+math.sin( math.radians( lat ) ) )
+            if distance < 15:
+                nearest.append([list(entry), distance])
+                count +=1
+            if count==3:
+                break
+    if type=="Fire":
+        fire_db = pd.read_csv("hyderabad fire stations.csv")
+        nearest=[]
+        count=0
+        for index, entry in fire_db.iterrows():
+            distance = 3959 * math.acos( math.cos( math.radians(lat) ) * math.cos( math.radians( float(entry["Y"]) ) ) * 
+math.cos( math.radians( long ) - math.radians(float(entry["X"])) ) + math.sin( float(math.radians(entry["Y"] )) ) * 
+math.sin( math.radians( lat ) ) )
+            if distance < 15:
+                nearest.append([list(entry), distance])
+                count +=1
+            if count==3:
+                break
+        
+        
+    return nearest
+
+def get_category(transcription):
+    concatenated_text = '\n'.join([f"{item[0]}: {item[1]}" if item[0] != 'You.' else item[1] for item in transcription])
+    co = cohere.Client('9gTWsgGsGUoSSKzUvLuZdcuEtuBO2CIhiG9s17nU') # This is your trial API key
+    response = co.classify(
+    model='2196d10d-e411-417d-b342-2882c65248f5-ft',
+    inputs=[concatenated_text ],
+    )
+    return(response.classifications[0].prediction)

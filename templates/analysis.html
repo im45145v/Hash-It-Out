@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Transcription</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .transcription-container {
+            margin-top: 10px;
+        }
+
+        p {
+            margin: 0;
+            padding: 5px 0;
+        }
+
+        #myMap {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Detected Incident Type</h1>
+        <div class="transcription-container">
+            {{analysis_data['category']}}
+        </div>
+
+    </div>
+    <div class="container">
+        <h1>Detected Incident Severity</h1>
+        <p>8</p>
+       
+    </div>
+    <div class="container">
+        <h1>Nearest emergency responders</h1>
+        {% for var in analysis_data['nearest'] %}
+            
+            <div class="container">
+                <h2>Name: {{var[0][0][5]}}</h2>
+                <p>Details: {{analysis_data['nearest']}}</p>
+            </div>
+
+            {% endfor %}
+
+       
+       
+    </div>
+    
+</body>
+
+</html>
