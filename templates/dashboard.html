@@ -3,18 +3,20 @@
 
 <head>
     <title>Emergency Response System</title>
+    <!-- Include Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #cadcfc;
-            color: #faf2e9;
+            background-color: #333;
+            color: #000;
             text-align: center;
             margin: 0;
             padding: 0;
         }
 
         .container {
-            background-color: #8ab6f9;
+            background-color: rgba(255, 255, 255, 0.9);
             border: 1px solid #ccc;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -25,12 +27,12 @@
         }
 
         h1 {
-            color: #00246b
-            text-align: center;
+            color: #ff9900;
         }
 
         p {
             margin: 0;
+            color: #000;
             padding: 10px 0;
         }
 
@@ -41,15 +43,15 @@
         }
 
         .feature {
-            background-color: #00246b;
-            color: #faf2e9;
+            background-color: rgba(0, 123, 255, 0.8);
+            color: #000;
             padding: 20px;
             border-radius: 5px;
             margin: 20px 0;
         }
 
         .feature h2 {
-            color: #00246b;
+            color: #ffcc00;
         }
 
         a.button {
@@ -62,7 +64,7 @@
         }
 
         a.button:hover {
-            background-color: #2973c2;
+            background-color: #0056b3;
         }
 
         /* Styling for file upload input */
@@ -73,7 +75,7 @@
         label.upload-button {
             display: block;
             background-color: #007bff;
-            color: #fff;
+            color: #000;
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
@@ -103,7 +105,7 @@
         }
 
         .github-link a {
-            color: #d3a166;
+            color: #ff9900;
             text-decoration: none;
         }
 
@@ -111,48 +113,58 @@
             text-decoration: underline;
         }
 
-        /* Styling for logo image */
-        .logo {
-            display: block;
-            margin: 0 auto 20px;
-            max-width: 100%;
-            height: auto;
-        }</style>
+        /* Center the titles and buttons */
+        .center-content {
+            text-align: center;
+        }
+
+        /* Center the spinner and text */
+        #spinnerDiv {
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
-    <img class="logo" src='data:image/png;base64,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' alt="Emergency Response System Logo> <!-- Replace 'logo.png' with your logo image path -->
-
-    < div class="container">
-        <h1 style="color: #00246b; text-align: center;">Emergency Response System</h1>
-        <p style="color: #000;">Welcome to the Emergency Response System, a critical tool for addressing emergency situations promptly and effectively. Our system is designed to assist in emergency response by providing the following features:</p>
-    </div>
-        <div class="container">
+    <div class="container center-content">
+        <h1>Emergency Response System</h1>
+        <p>Welcome to the Emergency Response System, a critical tool for addressing emergency situations promptly and effectively. Our system is designed to assist in emergency response by providing the following features:</p>
         <ul>
-            <li style="color: #000;">Audio Transcription: Quickly convert spoken words from emergency calls into text for easy understanding.</li>
-            <li style="color: #000;">Summarization: Get a concise summary of the emergency call to assess the situation at a glance.</li>
-            <li style="color: #000;">Disaster Recognition: Automatically identify the type of disaster (e.g., fire, earthquake, flood) and its severity level.</li>
-            <li style="color: #000;">Department Contact Information: Find contact information for the appropriate response departments, such as police, fire stations, medical facilities, and more.</li>
+            <li>Audio Transcription: Quickly convert spoken words from emergency calls into text for easy understanding.</li>
+            <li>Summarization: Get a concise summary of the emergency call to assess the situation at a glance.</li>
+            <li>Disaster Recognition: Automatically identify the type of disaster (e.g., fire, earthquake, flood) and its severity level.</li>
+            <li>Department Contact Information: Find contact information for the appropriate response departments, such as police, fire stations, medical facilities, and more.</li>
         </ul>
-        </div>
-        <div class="container">
-        <p style="color: #000;"><b>our system, you can ensure a swift and coordinated response to any emergency, potentially saving lives and minimizing damage. Do not hesitate to use the features provided to make informed decisions during critical situations.</b></p>
-        <a class="button" href="#features" style="background-color: #007bff;">Explore Features</a>
-        </div>
+        <p>With our system, you can ensure a swift and coordinated response to any emergency, potentially saving lives and minimizing damage. Don't hesitate to use the features provided to make informed decisions during critical situations.</p>
+        <a class="button" href="#features">Explore Features</a>
+    </div>
 
-    <div class="container">
-        <h1 style="color: #00246b; text-align: center;">Upload an Audio File</h1>
-        <form action="/upload" method="POST" enctype="multipart/form-data">
-            <label class="upload-button" for="audio_file" style="background-color: #007bff;">Choose an audio file</label>
+    <div class="container center-content">
+        <h1>Upload an Audio File</h1>
+        <form action="/upload" method="POST" enctype="multipart/form-data" onsubmit="showSpinner()">
+            <label class="upload-button" for="audio_file">Choose an audio file</label>
             <input type="file" name="audio_file" id="audio_file" accept=".mp3, .wav, .ogg, .flac" required>
             <br><br>
-            <button type="submit" style="background-color: #007bff;">Upload</button>
+            <!-- Add a div to display the yellow spinner and text -->
+            <div class="text-center" id="spinnerDiv" style="display: none;">
+                <div class="spinner-border text-warning"></div>
+                <p class="text-warning">Performing AI powered analysis</p>
+            </div>
+            <button type="submit" id="uploadButton">Upload</button>
         </form>
     </div>
 
-    <div class="container github-link">
-        <p style="color: #00246b; text-align: center;">If you would like to contribute or update our system, visit our <a href="https://github.com/your-organization/emergency-response-system" target="_blank" style="color: #ff9900;">GitHub repository</a>.</p>
+    <div class="container github-link center-content">
+        <p>If you would like to contribute or update our system, visit our <a href="https://github.com/your-organization/emergency-response-system" target="_blank">GitHub repository</a>.</p>
     </div>
+
+    <script>
+        function showSpinner() {
+            // Hide the "Upload" button and show the spinner and text
+            document.getElementById("uploadButton").style.display = "none";
+            document.getElementById("spinnerDiv").style.display = "block";
+        }
+    </script>
 </body>
 
 </html>
