@@ -24,7 +24,7 @@ def upload():
 
     audio_file = request.files['audio_file']
     audio_bytes = audio_file.read()
-    print(transcribe(audio_bytes))
+    transcription , transcription_id = transcribe(audio_bytes)
     # Check if the file is empty
     # if audio_file.filename == '':
     #     return "No selected file"
@@ -35,7 +35,7 @@ def upload():
 
     # transcribe(audio_file)
 
-    return f"File '{audio_file.filename}' has been uploaded and processed."
+    return render_template('Transcription.html',transcription=transcription)
 
 if __name__ == '__main__':
     app.run(debug=True)

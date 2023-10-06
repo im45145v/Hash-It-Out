@@ -1,0 +1,18 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <head>
+        <title>Transcription</title>    
+</head>
+<body>
+
+    <div class="container">
+        <h1>Transcription</h1>
+        <div class="transcription-container">
+            {% for dictionary in transcription %}
+                <p>{{ dictionary[0] }} :  {{ dictionary[1] }}</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -35,7 +35,7 @@ def transcribe(audio_file):
             for utterance in utterances:
                 speaker = utterance['speaker']
                 text = utterance['text']
-                transcript.append({f"Speaker {speaker}": text})
+                transcript.append([f"Speaker {speaker}", text])
             return [transcript, transcription_result['id']]
 
 
