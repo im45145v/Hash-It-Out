@@ -6,15 +6,18 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #000;
+            color: #fff;
             text-align: center;
+            margin: 0;
+            padding: 0;
         }
 
         h1 {
             color: #333;
         }
 
-        form {
+        .container {
             margin: 20px auto;
             max-width: 400px;
             padding: 20px;
@@ -28,7 +31,7 @@
             display: none;
         }
 
-        label {
+        label.upload-button {
             display: block;
             background-color: #007bff;
             color: #fff;
@@ -37,7 +40,7 @@
             cursor: pointer;
         }
 
-        label:hover {
+        label.upload-button:hover {
             background-color: #0056b3;
         }
 
@@ -53,17 +56,28 @@
         button[type="submit"]:hover {
             background-color: #0056b3;
         }
+
+        /* Styling for file upload input */
+        input[type="file"] {
+            display: none;
+        }
+
+        label.upload-button input[type="file"] {
+            display: none;
+        }
     </style>
 </head>
 
 <body>
-    <h1>Upload an Audio File</h1>
-    <form action="/upload" method="POST" enctype="multipart/form-data">
-        <label for="audio_file">Choose an audio file</label>
-        <input type="file" name="audio_file" id="audio_file" accept=".mp3, .wav, .ogg, .flac" required>
-        <br><br>
-        <button type="submit">Upload</button>
-    </form>
+    <div class="container">
+        <h1>Upload an Audio File</h1>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <label class="upload-button" for="audio_file">Choose an audio file</label>
+            <input type="file" name="audio_file" id="audio_file" accept=".mp3, .wav, .ogg, .flac" required>
+            <br><br>
+            <button type="submit">Upload</button>
+        </form>
+    </div>
 </body>
 
 </html>
