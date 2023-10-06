@@ -16,10 +16,6 @@ app.config['UPLOAD_FOLDER'] = 'uploads'
 # Create the upload folder if it doesn't exist
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
-@app.route('/')
-def index():
-    return render_template('upload.html')
-
 @app.route('/upload', methods=['POST'])
 def upload():
     # Check if the 'audio_file' file input field is present in the form
