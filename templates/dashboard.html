@@ -7,14 +7,14 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #333;
-            color: #000;
+            color: #fff;
             text-align: center;
             margin: 0;
             padding: 0;
         }
 
         .container {
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(0, 0, 0, 0.9);
             border: 1px solid #ccc;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -26,11 +26,11 @@
 
         h1 {
             color: #ff9900;
+            text-align: center;
         }
 
         p {
             margin: 0;
-            color: #000;
             padding: 10px 0;
         }
 
@@ -73,7 +73,7 @@
         label.upload-button {
             display: block;
             background-color: #007bff;
-            color: #000;
+            color: #fff;
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
@@ -110,10 +110,20 @@
         .github-link a:hover {
             text-decoration: underline;
         }
+
+        /* Styling for logo image */
+        .logo {
+            display: block;
+            margin: 0 auto 20px;
+            max-width: 100%;
+            height: auto;
+        }
     </style>
 </head>
 
 <body>
+    <img class="logo" src='data:image/jpeg;base64,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' alt="Emergency Response System Logo"> <!-- Replace 'logo.png' with your logo image path -->
+
     <div class="container">
         <h1>Emergency Response System</h1>
         <p>Welcome to the Emergency Response System, a critical tool for addressing emergency situations promptly and effectively. Our system is designed to assist in emergency response by providing the following features:</p>
