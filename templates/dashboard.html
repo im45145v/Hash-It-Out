@@ -6,7 +6,140 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #333;
+            color: #000;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
 
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            max-width: 800px;
+            padding: 20px;
+            text-align: left;
+        }
+
+        h1 {
+            color: #ff9900;
+        }
+
+        p {
+            margin: 0;
+            color: #000;
+            padding: 10px 0;
+        }
+
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            padding-left: 20px;
+        }
+
+        .feature {
+            background-color: rgba(0, 123, 255, 0.8);
+            color: #000;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .feature h2 {
+            color: #ffcc00;
+        }
+
+        a.button {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        a.button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Styling for file upload input */
+        input[type="file"] {
+            display: none;
+        }
+
+        label.upload-button {
+            display: block;
+            background-color: #007bff;
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        label.upload-button:hover {
+            background-color: #0056b3;
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        /* Styling for GitHub link */
+        .github-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .github-link a {
+            color: #ff9900;
+            text-decoration: none;
+        }
+
+        .github-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Emergency Response System</h1>
+        <p>Welcome to the Emergency Response System, a critical tool for addressing emergency situations promptly and effectively. Our system is designed to assist in emergency response by providing the following features:</p>
+        <ul>
+            <li>Audio Transcription: Quickly convert spoken words from emergency calls into text for easy understanding.</li>
+            <li>Summarization: Get a concise summary of the emergency call to assess the situation at a glance.</li>
+            <li>Disaster Recognition: Automatically identify the type of disaster (e.g., fire, earthquake, flood) and its severity level.</li>
+            <li>Department Contact Information: Find contact information for the appropriate response departments, such as police, fire stations, medical facilities, and more.</li>
+        </ul>
+        <p>With our system, you can ensure a swift and coordinated response to any emergency, potentially saving lives and minimizing damage. Don't hesitate to use the features provided to make informed decisions during critical situations.</p>
+        <a class="button" href="#features">Explore Features</a>
+    </div>
+
+    <div class="container">
+        <h1>Upload an Audio File</h1>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <label class="upload-button" for="audio_file">Choose an audio file</label>
+            <input type="file" name="audio_file" id="audio_file" accept=".mp3, .wav, .ogg, .flac" required>
+            <br><br>
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+
+    <div class="container github-link">
+        <p>If you would like to contribute or update our system, visit our <a href="https://github.com/your-organization/emergency-response-system" target="_blank">GitHub repository</a>.</p>
+    </div>
 </body>
 
 </html>
