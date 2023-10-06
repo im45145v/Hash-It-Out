@@ -23,6 +23,11 @@
         h1 {
             color: #333;
         }
+        
+        .color{
+            color: #FF0000;
+            font-size: 2em;
+        }
 
         .transcription-container {
             margin-top: 10px;
@@ -45,14 +50,14 @@
 <body>
     <div class="container">
         <h1>Detected Incident Type</h1>
-        <div class="transcription-container">
+        <div class = 'color'>
             {{analysis_data['category']}}
         </div>
 
     </div>
     <div class="container">
         <h1>Detected Incident Severity</h1>
-        <p>8</p>
+        <h1>{{analysis_data['severity']}}</h1>
        
     </div>
     <div class="container">
@@ -60,7 +65,7 @@
         {% for var in analysis_data['nearest'] %}
             
             <div class="container">
-                <h2>Name: {{var[0][0][5]}}</h2>
+                <h2>Name: {{var[0][5]}}</h2>
                 <p>Details: {{analysis_data['nearest']}}</p>
             </div>
 
