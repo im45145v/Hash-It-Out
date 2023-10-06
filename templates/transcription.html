@@ -12,7 +12,39 @@
         <div class="transcription-container">
             {% for dictionary in transcription %}
                 <p>{{ dictionary[0] }} :  {{ dictionary[1] }}</p>
+            {% endfor %}
         </div>
+
+        <h1>Summary</h1>
+        <p> {{summary}} <p>
     </div>
+    <div class="container">
+        <h1> Detected address </h1>
+        <p>{{address}}</p>
+        <p>Latitutde: {{coords[0]}} <br> Longitude: {{coords[1]}}</p>
+    </div>
+        <script type='text/javascript'>
+        function GetMap() {
+            var map = new Microsoft.Maps.Map('#myMap', {
+                credentials: "YOUR_BING_API_KEY"
+            });
+    
+            //Request the user's location
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var loc = new Microsoft.Maps.Location(
+                    {{coords[0]}},
+                   {{coords[1]}});
+    
+                //Add a pushpin at the user's location.
+                var pin = new Microsoft.Maps.Pushpin(loc);
+                map.entities.push(pin);
+    
+                //Center the map on the user's location.
+                map.setView({ center: loc, zoom: 10 });
+            });
+        }
+        </script>
+        <script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+    <div id="myMap" style="position:relative;width:600px;height:400px;"></div>
 </body>
 </html>
