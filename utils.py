@@ -94,9 +94,13 @@ math.sin( math.radians( lat ) ) )
 
 def get_category(transcription):
     concatenated_text = '\n'.join([f"{item[0]}: {item[1]}" if item[0] != 'You.' else item[1] for item in transcription])
-    co = cohere.Client('9gTWsgGsGUoSSKzUvLuZdcuEtuBO2CIhiG9s17nU') # This is your trial API key
+    co = cohere.Client('') # This is your trial API key
     response = co.classify(
     model='2196d10d-e411-417d-b342-2882c65248f5-ft',
     inputs=[concatenated_text ],
     )
     return(response.classifications[0].prediction)
+
+def get_severity(transcription_id):
+    severity = question(transcription_id, q_format("Determine how severe the emergency, with national level destruction being 10 while small incident is 1", "floating point number between 1-10"))
+    return severity["response"][0]["answer"]

@@ -62,7 +62,7 @@
     <script type='text/javascript'>
         function GetMap() {
             var map = new Microsoft.Maps.Map('#myMap', {
-                credentials: "YOUR_BING_API_KEY"
+                credentials: ""
             });
 
             //Request the user's location
@@ -85,6 +85,8 @@
     </script>
     <script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
     <div id="myMap"></div>
+
+    <a href = "{{url_for('analysis')}}">Click here for analysis</a>
 </body>
 
 </html>

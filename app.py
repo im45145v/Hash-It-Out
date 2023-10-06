@@ -31,7 +31,7 @@ def upload():
     summary = summarize(transcription_id, context = "The caller is contacting a first responder with an emergency distress call")
     address = get_address(transcription_id)
     coords = get_coords(address)
-    session['details']={'summary':summary, 'address':address,'coords':coords,'transcription':transcription}
+    session['details']={'summary':summary, 'address':address,'coords':coords,'transcription':transcription,'transcription_id': transcription_id}
     # transcription = summary = address= ''
     # Check if the file is empty
     # if audio_file.filename == '':
@@ -49,7 +49,8 @@ def analysis():
     data = session['details']
     category = get_category(data['transcription'])
     nearest = get_nearest(category, data['coords'][0], data['coords'][1])
-    analysis_data = {'category':category, 'nearest': nearest}
+    severity = get_severity(data['transcription_id'])
+    analysis_data = {'category':category, 'nearest': nearest, 'severity':severity}
     return render_template('analysis.html',analysis_data=analysis_data)
     
 if __name__ == '__main__':
