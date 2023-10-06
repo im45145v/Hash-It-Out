@@ -2,7 +2,8 @@ from flask import Flask, render_template, request, jsonify, redirect, url_for, s
 import os
 # from function import functions
 
-from transcription_summarization import transcribe
+from transcription_summarization import transcribe,summarize
+from utils import *
 app = Flask(__name__)
 
 # Home page
@@ -25,6 +26,10 @@ def upload():
     audio_file = request.files['audio_file']
     audio_bytes = audio_file.read()
     transcription , transcription_id = transcribe(audio_bytes)
+    summary = summarize(transcription_id, context = "The caller is contacting a first responder with an emergency distress call")
+    address = get_address(transcription_id)
+    coords = get_coords(address)
+    # transcription = summary = address= ''
     # Check if the file is empty
     # if audio_file.filename == '':
     #     return "No selected file"
@@ -35,7 +40,7 @@ def upload():
 
     # transcribe(audio_file)
 
-    return render_template('Transcription.html',transcription=transcription)
+    return render_template('transcription.html',transcription=transcription, summary = summary,coords=coords, address=address)
 
 if __name__ == '__main__':
     app.run(debug=True)

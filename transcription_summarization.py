@@ -1,5 +1,6 @@
 import requests
 import time
+import geocoder
 
 API_KEY="ab8609a877cd4f91b6269e7f768127a6"
 # replace with your API token
@@ -45,3 +46,33 @@ def transcribe(audio_file):
         else:
             time.sleep(3)
             
+       
+def summarize(transcription_id, context):
+    transcript_ids = [transcription_id]
+
+    data = {
+        "transcript_ids": transcript_ids,
+        "context": context,
+        "answer_format": '''short detailed summary
+'''
+    }
+
+    lemur_output = post_lemur(API_KEY, data)
+    lemur_response = lemur_output.json()
+    if "error" in lemur_response:
+        print(f"Error: { lemur_response['error'] }")
+    else:
+        return(lemur_response['response'])
+def post_lemur(api_token, data):
+    url = "https://api.assemblyai.com/lemur/v3/generate/summary"
+
+    headers = {
+        "authorization": api_token
+    }
+
+    response = requests.post(url, json=data, headers=headers)
+    return response
+
+def get_coords(address):
+    g = geocoder.bing(address, key='Aowcdh3tB--xi-HGt95MZr7jCFWqDenSzKp0yDtC2AgfH_HstHkEBY2XkFgw9XW9')
+    return [g.json['lat'], g.json['lng']]
