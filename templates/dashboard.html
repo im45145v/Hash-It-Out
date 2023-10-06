@@ -1,9 +1,16 @@
-<!DOCTYPE html>
 <html>
-<head>
-    <title>Dashboard</title>
-</head>
-<body>
-   <p>Hello</p>
-</body>
-</html>
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Audio File Upload</title>
+    </head>
+    <body>
+        <h1>Upload an Audio File</h1>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="audio_file" accept=".mp3, .wav, .ogg, .flac" required>
+            <br><br>
+            <button type="submit">Upload</button>
+        </form>
+    </body>
+    </html>
+    
