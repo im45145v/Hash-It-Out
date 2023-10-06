@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, jsonify, redirect, url_for, s
 import os
 # from function import functions
 
-
+from transcription_summarization import transcribe
 app = Flask(__name__)
 
 # Home page
@@ -23,14 +23,15 @@ def upload():
         return "No file part"
 
     audio_file = request.files['audio_file']
-
+    audio_bytes = audio_file.read()
+    print(transcribe(audio_bytes))
     # Check if the file is empty
-    if audio_file.filename == '':
-        return "No selected file"
+    # if audio_file.filename == '':
+    #     return "No selected file"
 
-    # Save the uploaded file to the 'uploads' folder
-    upload_path = os.path.join(app.config['UPLOAD_FOLDER'], audio_file.filename)
-    audio_file.save(upload_path)
+    # # Save the uploaded file to the 'uploads' folder
+    # upload_path = os.path.join(app.config['UPLOAD_FOLDER'], audio_file.filename)
+    # audio_file.save(upload_path)
 
     # transcribe(audio_file)
 
